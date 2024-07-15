@@ -1,3 +1,5 @@
+import FreeFile from "@/components/home/FreeFile";
+import Plans from "@/components/home/plans";
 import ProductCard from "@/components/shared/Card";
 import { productsFake } from "@/mocks/cardData";
 import React from "react";
@@ -10,6 +12,8 @@ const Home = () => {
           <ProductCard key={product._id} product={product} />
         ))}
       </div>
+      <Plans />
+      <FreeFile />
     </div>
   );
 };
