@@ -5,7 +5,7 @@ import { productsFake } from "@/mocks/cardData";
 
 const FreeFile = () => {
   return (
-    <section className="mt-[60px] mb-[40px]s">
+    <section className="mt-[60px] mb-[40px] container_main">
       <h6 className="text-3xl font-semibold mb-[20px] text-center">
         2 Files Free For New Users
       </h6>

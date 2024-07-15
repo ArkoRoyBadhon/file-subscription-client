@@ -6,6 +6,7 @@ import {
   CardTitle,
   CardDescription,
   CardContent,
+  CardFooter,
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -13,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import Link from "next/link";
 
 export default function SignUpForm() {
   const {
@@ -103,6 +105,12 @@ export default function SignUpForm() {
           </Button>
         </form>
       </CardContent>
+      <CardFooter className="flex justify-center gap-2">
+        <span>Already have an account?</span>
+        <Link href="/login">
+          <Button variant="ghost">Login</Button>
+        </Link>
+      </CardFooter>
     </Card>
   );
 }

@@ -34,7 +34,7 @@ const plansData = [
 
 const Plans = () => {
   return (
-    <section className="py-[60px] pb-[40px]">
+    <section className="py-[60px] pb-[40px] container_main">
       <div className="text-center mb-8">
         <h2 className="text-3xl font-bold">Plans and Pricing</h2>
       </div>

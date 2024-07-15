@@ -18,7 +18,7 @@ const page = ({ params }: { params: { slug: string } }) => {
             height={600}
             width={800}
             alt=""
-            className="w-full"
+            className="w-full aspect-video object-cover rounded-lg"
           />
         </div>
         <div className="w-1/4 p-[10px]">
