@@ -1,5 +1,6 @@
 import FreeFile from "@/components/home/FreeFile";
 import Plans from "@/components/home/plans";
+import Subscribe from "@/components/home/Subscribe";
 import ProductCard from "@/components/shared/Card";
 import { productsFake } from "@/mocks/cardData";
 import React from "react";
@@ -14,6 +15,7 @@ const Home = () => {
       </div>
       <Plans />
       <FreeFile />
+      <Subscribe />
     </div>
   );
 };

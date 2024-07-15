@@ -1,5 +1,7 @@
 import Link from "next/link";
 import React from "react";
+import ProductCard from "../shared/Card";
+import { productsFake } from "@/mocks/cardData";
 
 const FreeFile = () => {
   return (
@@ -18,6 +20,19 @@ const FreeFile = () => {
           className="bg-red-700 font-bold text-white px-[20px] py-[12px] rounded-lg mt-[20px]"
         >
           Create New Account
+        </Link>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-[20px]">
+        {productsFake.splice(0,3).map((product) => (
+          <ProductCard key={product._id} product={product} />
+        ))}
+      </div>
+      <div className="flex w-full justify-center">
+        <Link
+          href="/signup"
+          className="bg-red-700 font-bold text-white px-[20px] py-[12px] rounded-lg mt-[20px]"
+        >
+          More
         </Link>
       </div>
     </section>

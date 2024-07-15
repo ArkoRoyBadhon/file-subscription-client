@@ -14,4 +14,25 @@ export const productsFake = [
       price: 49.99,
       image: '/images/download.jpeg',
     },
+    {
+      _id: 3,
+      name: 'Product 3',
+      description: 'This is another great product.',
+      price: 49.99,
+      image: '/images/download.jpeg',
+    },
+    {
+      _id: 4,
+      name: 'Product 4',
+      description: 'This is another great product.',
+      price: 49.99,
+      image: '/images/download.jpeg',
+    },
+    {
+      _id: 5,
+      name: 'Product 5',
+      description: 'This is another great product.',
+      price: 49.99,
+      image: '/images/download.jpeg',
+    },
   ];
