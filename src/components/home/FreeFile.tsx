@@ -22,7 +22,8 @@ const FreeFile = () => {
           Create New Account
         </Link>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-[20px]">
+      <p className="mt-[10px]">You can select any two file</p>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-[10px]">
         {productsFake.splice(0,3).map((product) => (
           <ProductCard key={product._id} product={product} />
         ))}

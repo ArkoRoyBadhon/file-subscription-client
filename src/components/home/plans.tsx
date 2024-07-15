@@ -40,7 +40,7 @@ const Plans = () => {
       </div>
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {plansData.map((plan) => (
-          <li key={plan.id} className="border rounded-lg shadow-md overflow-hidden flex flex-col justify-between">
+          <li key={plan.id} className="border rounded-lg shadow-md overflow-hidden flex flex-col justify-between hover:shadow-xl transition-all ease-in">
             <div className="p-6">
               <h3 className="text-xl font-semibold mb-2">{plan.title}</h3>
               <p className="text-gray-600 mb-4">{plan.description}</p>
