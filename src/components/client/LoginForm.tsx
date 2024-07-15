@@ -14,7 +14,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-export default function SignUpForm() {
+export default function LoginForm() {
   const {
     register,
     handleSubmit,
@@ -22,8 +22,6 @@ export default function SignUpForm() {
   } = useForm({
     resolver: yupResolver(
       yup.object().shape({
-        firstName: yup.string().required("First name is required"),
-        lastName: yup.string().required("Last name is required"),
         email: yup
           .string()
           .email("Invalid email address")
@@ -43,37 +41,13 @@ export default function SignUpForm() {
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
-        <CardTitle>Create an account</CardTitle>
+        <CardTitle>Login</CardTitle>
         <CardDescription>
-          Enter your details below to get started.
+          Enter your email and password to log in.
         </CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="firstName">First Name</Label>
-              <Input
-                id="firstName"
-                placeholder="John"
-                {...register("firstName")}
-              />
-              {errors.firstName && (
-                <p className="text-red-500">{errors.firstName.message}</p>
-              )}
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="lastName">Last Name</Label>
-              <Input
-                id="lastName"
-                placeholder="Doe"
-                {...register("lastName")}
-              />
-              {errors.lastName && (
-                <p className="text-red-500">{errors.lastName.message}</p>
-              )}
-            </div>
-          </div>
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
             <Input
@@ -99,7 +73,7 @@ export default function SignUpForm() {
             )}
           </div>
           <Button type="submit" className="w-full">
-            Create Account
+            Login
           </Button>
         </form>
       </CardContent>

@@ -1,5 +1,12 @@
 @tailwind base;
 @tailwind components;
+
+@layer components {
+  .container_main {
+    @apply px-4 xl:px-0 max-w-7xl mx-auto;
+  }
+}
+
 @tailwind utilities;
 
 @layer base {
