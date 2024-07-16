@@ -3,6 +3,10 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100.200.400.500.600.700.900&display=swap');
 
+@font-face {
+  font-family: "SohneBreitTest";
+  src: url("/fonts/font.otf") format("opentype");
+}
 
 @layer components {
   .container_main {
@@ -74,6 +78,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-montserrat;
+    @apply bg-background text-foreground;
+    font-family: "SohneBreitTest", sans-serif !important;
   }
 }

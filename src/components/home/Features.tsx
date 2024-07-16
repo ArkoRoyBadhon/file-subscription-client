@@ -6,9 +6,9 @@ const Features = () => {
   return (
     <>
       <div className="text-center pt-20">
-        <h1 className="text-5xl font-bold">Why people choose us?</h1>
+        <h1 className="text-5xl font-bold text-primaryTxt">Why people choose us?</h1>
       </div>
-      <div className="py-20 container_main grid grid-cols-4 gap-5">
+      <div className="py-20 container_main grid grid-cols-4 gap-5 text-primaryTxt">
         {features.map(({ title, description }, idx: number) => (
           <div key={idx} className="flex flex-col gap-3">
             {idx === 0 && <First />}

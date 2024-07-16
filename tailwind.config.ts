@@ -19,6 +19,10 @@ const config = {
     },
     extend: {
       colors: {
+
+        btnColor: "#E40046",
+        primaryTxt: "#404040",
+
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

@@ -6,7 +6,7 @@ import { Button } from "../ui/button";
 const ProductCard = ({ product }: any) => {
   return (
     <div className="max-w-sm rounded-md overflow-hidden shadow-lg m-4 relative">
-      <span className="absolute top-0 right-0 inline-block bg-gray-200 rounded-bl-full px-5 py-1 text-sm font-semibold text-gray-700 mb-2">
+      <span className="absolute top-0 right-0 inline-block rounded-bl-full px-5 py-1 text-sm font-semibold  mb-2 capitalize bg-btnColor text-white">
         premium
       </span>
       <Link href={`/product/${product?._id}`}>
@@ -18,14 +18,14 @@ const ProductCard = ({ product }: any) => {
           alt={product.name}
         />
         <div className="px-6 pt-3">
-          <div className="text-xl font-bold">{product.name}</div>
+          <div className="text-xl font-bold text-primaryTxt">{product.name}</div>
         </div>
       </Link>
       <div className="px-6 py-2 flex justify-between">
-        <p className="text-gray-700 text-base line-clamp-1">
+        <p className=" text-base line-clamp-1 text-primaryTxt">
           {product.description}
         </p>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 text-primaryTxt">
           <Button size="icon" variant="ghost">
             <Bookmark />
           </Button>

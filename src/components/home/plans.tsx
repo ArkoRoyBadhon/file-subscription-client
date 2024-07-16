@@ -36,11 +36,11 @@ const Plans = () => {
   return (
     <section className="py-[60px] pb-[40px] container_main">
       <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold">Plans and Pricing</h2>
+        <h2 className="text-3xl font-bold text-primaryTxt">Plans and Pricing</h2>
       </div>
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {plansData.map((plan) => (
-          <li key={plan.id} className="border rounded-lg shadow-md overflow-hidden flex flex-col justify-between hover:shadow-xl transition-all ease-in">
+          <li key={plan.id} className="border text-primaryTxt rounded-lg shadow-md overflow-hidden flex flex-col justify-between hover:shadow-xl transition-all ease-in">
             <div className="p-6">
               <h3 className="text-xl font-semibold mb-2">{plan.title}</h3>
               <p className="text-gray-600 mb-4">{plan.description}</p>

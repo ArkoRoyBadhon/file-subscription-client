@@ -47,7 +47,7 @@ const page = ({ params }: { params: { slug: string } }) => {
               <p className="">Simple licensing</p>
             </div>
 
-            <button className="w-full bg-red-700 text-white tracking-tighter font-bold mt-[40px] rounded-md py-[8px]">
+            <button className="w-full bg-btnColor text-white tracking-tighter font-bold mt-[40px] rounded-md py-[8px]">
               Download
             </button>
           </div>
@@ -68,7 +68,7 @@ const page = ({ params }: { params: { slug: string } }) => {
         <div className="w-1/4 pl-[20px]">
           <div className="relative ">
             <div className="flex items-center">
-              <div className="absolute w-[10px] h-[10px] left-0 bg-red-700"></div>
+              <div className="absolute w-[10px] h-[10px] left-0 bg-btnColor"></div>
               <p className="ml-[20px] text-[18px] font-semibold">Types</p>
             </div>
             <p className="">Web Template</p>

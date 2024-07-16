@@ -6,6 +6,7 @@ import TopSections from "@/components/home/TopSections";
 import ProductCard from "@/components/shared/Card";
 import { productsFake } from "@/mocks/cardData";
 import React from "react";
+import Creator from "@/components/home/Creator";
 
 const Home = () => {
   return (
@@ -18,6 +19,7 @@ const Home = () => {
         ))}
       </div> */}
       <Plans />
+      <Creator />
       <FreeFile />
       <Subscribe />
     </div>
