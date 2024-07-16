@@ -1,6 +1,9 @@
 @tailwind base;
 @tailwind components;
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100.200.400.500.600.700.900&display=swap');
+
+
 @layer components {
   .container_main {
     @apply px-4 xl:px-0 max-w-7xl mx-auto;
@@ -71,6 +74,6 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-montserrat;
   }
 }

@@ -15,7 +15,7 @@ const TopSections = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-3 gap-5 py-10">
+        <div className="grid grid-cols-3 gap-5 py-10 px-[40px]">
           {assets.map((item: any, idx: number) => (
             <div key={idx} className="flex flex-col gap-2">
               <Image src={item.img} alt={item.title} height={200} width={300} />
