@@ -15,13 +15,26 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useRegisterUserMutation } from "@/redux/features/auth/auth.api";
+
+interface SignUpFormValues {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
 
 export default function SignUpForm() {
+  const router = useRouter();
+  const [registerUser, { isLoading, isError, error }] =
+    useRegisterUserMutation();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<SignUpFormValues>({
     resolver: yupResolver(
       yup.object().shape({
         firstName: yup.string().required("First name is required"),
@@ -38,8 +51,16 @@ export default function SignUpForm() {
     ),
   });
 
-  const onSubmit = (data: any) => {
-    console.log("form data", data);
+  const onSubmit = async (data: SignUpFormValues) => {
+    try {
+      const response = await registerUser(data).unwrap();
+
+      if (response) {
+        router.push("/login");
+      }
+    } catch (err) {
+      console.error("Error during registration:", err);
+    }
   };
 
   return (
@@ -100,10 +121,15 @@ export default function SignUpForm() {
               <p className="text-red-500">{errors.password.message}</p>
             )}
           </div>
-          <Button type="submit" className="w-full">
-            Create Account
+          <Button type="submit" className="w-full" disabled={isLoading}>
+            {isLoading ? "Creating Account..." : "Create Account"}
           </Button>
         </form>
+        {isError && (
+          <p className="text-red-500 mt-4">
+            {(error as any)?.data?.message || "Something went wrong!"}
+          </p>
+        )}
       </CardContent>
       <CardFooter className="flex justify-center gap-2">
         <span>Already have an account?</span>

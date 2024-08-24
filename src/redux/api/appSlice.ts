@@ -6,7 +6,7 @@ import {
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query/react";
 import Cookies from "js-cookie";
-import { setUser } from "../features/auth/auth.slice";
+import { clearUser, setUser } from "../features/auth/auth.slice";
 import { RootState } from "../store";
 
 const url = process.env.NEXT_PUBLIC_API_URL;
@@ -31,47 +31,51 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   let result = await baseQuery(args, api, extraOptions);
 
   if (result?.error?.status === 401) {
-    try {
-      const refreshToken = Cookies.get("refreshToken") || "";
+    const refreshToken = Cookies.get("refreshToken");
+    if (refreshToken) {
+      try {
+        const res = await fetch(`${url}/auth/refreshToken`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${refreshToken}`,
+          },
+        });
 
-      const res = await fetch(`${url}/auth/refreshToken`, {
-        method: "POST",
+        if (res.ok) {
+          const data = await res.json();
+          const newAccessToken = data?.data?.accessToken;
 
-        headers: {
-          Authorization: `Bearer ${refreshToken}`,
-        },
-      });
+          if (newAccessToken) {
+            const currentUser = (api.getState() as RootState).auth.user;
+            if (currentUser) {
+              // Dispatch the updated user with the new token
+              api.dispatch(
+                setUser({ ...currentUser })
+              );
 
-      const data = await res.json();
-      const token = data?.data?.accessToken || "";
-
-      if (token) {
-        const user = (api.getState() as RootState).auth.user;
-        api.dispatch(setUser({ user, token: token }));
-        result = await baseQuery(args, api, extraOptions);
+              // Retry the original request with the new token
+              result = await baseQuery(args, api, extraOptions);
+            }
+          } else {
+            api.dispatch(clearUser());
+          }
+        } else {
+          api.dispatch(clearUser());
+        }
+      } catch (error) {
+        api.dispatch(clearUser());
       }
-    } catch (error) {
-      api.dispatch(setUser({ token: null, user: null }));
+    } else {
+      api.dispatch(clearUser());
     }
   }
+
   return result;
 };
 
 export const api = createApi({
   reducerPath: "api",
-  // baseQuery: fetchBaseQuery({
-  //   baseUrl: process.env.NEXT_PUBLIC_AUTH_API,
-  //   prepareHeaders: (headers) => {
-  //     const token = Cookies.get("accessToken");
-  //     if (token) {
-  //       headers.set("Authorization", `Bearer ${token}`);
-  //     }
-
-  //     return headers;
-  //   },
-  //   // credentials: 'include',
-  // }),
-  // tagTypes: ["user", "Product", "Category", "tag", "Sell", "Brand", "Tag"],
   baseQuery: baseQueryWithRefreshToken,
   tagTypes: [
     "user",

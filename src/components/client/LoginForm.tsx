@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import {
   Card,
   CardHeader,
@@ -15,13 +16,24 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Link from "next/link";
+import { useLoginUserMutation } from "@/redux/features/auth/auth.api";
+import { useRouter } from "next/navigation";
+
+interface LoginFormValues {
+  email: string;
+  password: string;
+}
 
 export default function LoginForm() {
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [loginUser, { isLoading }] = useLoginUserMutation();
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<LoginFormValues>({
     resolver: yupResolver(
       yup.object().shape({
         email: yup
@@ -36,8 +48,15 @@ export default function LoginForm() {
     ),
   });
 
-  const onSubmit = (data: any) => {
-    console.log("form data", data);
+  const onSubmit = async (data: LoginFormValues) => {
+    setErrorMessage(null);
+    try {
+      const response = await loginUser(data).unwrap();
+      // Redirect to the dashboard or another page upon successful login
+      router.push("/dashboard");
+    } catch (error: any) {
+      setErrorMessage(error?.data?.message || "Failed to log in. Please try again.");
+    }
   };
 
   return (
@@ -57,6 +76,7 @@ export default function LoginForm() {
               type="email"
               placeholder="example@email.com"
               {...register("email")}
+              disabled={isLoading}
             />
             {errors.email && (
               <p className="text-red-500">{errors.email.message}</p>
@@ -69,20 +89,24 @@ export default function LoginForm() {
               type="password"
               placeholder="********"
               {...register("password")}
+              disabled={isLoading}
             />
             {errors.password && (
               <p className="text-red-500">{errors.password.message}</p>
             )}
           </div>
-          <Button type="submit" className="w-full">
-            Login
+          {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+          <Button type="submit" className="w-full" disabled={isLoading}>
+            {isLoading ? "Logging in..." : "Login"}
           </Button>
         </form>
       </CardContent>
       <CardFooter className="flex justify-center gap-2">
         <span>Don&apos;t have an account?</span>
         <Link href="/signup">
-          <Button variant="ghost">Sign Up</Button>
+          <Button variant="ghost" disabled={isLoading}>
+            Sign Up
+          </Button>
         </Link>
       </CardFooter>
     </Card>
