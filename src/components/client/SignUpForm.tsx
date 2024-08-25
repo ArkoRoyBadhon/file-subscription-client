@@ -17,6 +17,7 @@ import * as yup from "yup";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useRegisterUserMutation } from "@/redux/features/auth/auth.api";
+import { toast } from "sonner";
 
 interface SignUpFormValues {
   firstName: string;
@@ -55,8 +56,12 @@ export default function SignUpForm() {
     try {
       const response = await registerUser(data).unwrap();
 
-      if (response) {
+      if (response.success) {
         router.push("/login");
+      }
+
+      if(response.duplicate) {
+        toast.error("Email or Username Already Existed")
       }
     } catch (err) {
       console.error("Error during registration:", err);

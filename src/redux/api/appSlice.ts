@@ -50,9 +50,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
             const currentUser = (api.getState() as RootState).auth.user;
             if (currentUser) {
               // Dispatch the updated user with the new token
-              api.dispatch(
-                setUser({ ...currentUser })
-              );
+              api.dispatch(setUser({ ...currentUser }));
 
               // Retry the original request with the new token
               result = await baseQuery(args, api, extraOptions);
@@ -77,15 +75,6 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 export const api = createApi({
   reducerPath: "api",
   baseQuery: baseQueryWithRefreshToken,
-  tagTypes: [
-    "user",
-    "Product",
-    "Category",
-    "tag",
-    "Sell",
-    "Brand",
-    "Tag",
-    "customer",
-  ],
+  tagTypes: ["user", "plan", "Tag", "Category", "Product"],
   endpoints: () => ({}),
 });

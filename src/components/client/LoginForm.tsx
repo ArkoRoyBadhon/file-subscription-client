@@ -18,6 +18,8 @@ import * as yup from "yup";
 import Link from "next/link";
 import { useLoginUserMutation } from "@/redux/features/auth/auth.api";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/redux/hook";
+import { setToken, setUser } from "@/redux/features/auth/auth.slice";
 
 interface LoginFormValues {
   email: string;
@@ -28,6 +30,7 @@ export default function LoginForm() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [loginUser, { isLoading }] = useLoginUserMutation();
   const router = useRouter();
+  const dispatch = useAppDispatch()
 
   const {
     register,
@@ -52,8 +55,14 @@ export default function LoginForm() {
     setErrorMessage(null);
     try {
       const response = await loginUser(data).unwrap();
-      // Redirect to the dashboard or another page upon successful login
-      router.push("/dashboard");
+
+      if(response.success) {
+        dispatch(setUser(response.data))
+        dispatch(setToken(response.accessToken))
+
+        router.push("/");
+      }
+
     } catch (error: any) {
       setErrorMessage(error?.data?.message || "Failed to log in. Please try again.");
     }

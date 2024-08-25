@@ -30,7 +30,7 @@ const FreeFile = () => {
       </div>
       <div className="flex w-full justify-center">
         <Link
-          href="/signup"
+          href="/product"
           className="bg-btnColor font-bold text-white px-[20px] py-[12px] rounded-lg mt-[20px]"
         >
           More
