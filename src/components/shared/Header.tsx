@@ -15,7 +15,10 @@ const Header = () => {
         <SearchInput />
         <div className="flex items-center gap-5">
           {token ? (
+            <>
+            {/* <Link href="/profile">Dashboard</Link> */}
             <Link href="/profile">Profile</Link>
+            </>
           ) : (
             <Link href="/login">
               <Button variant="ghost" className="flex gap-2 items-center">

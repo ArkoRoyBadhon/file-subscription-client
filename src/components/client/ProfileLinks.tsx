@@ -3,9 +3,12 @@
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { usePathname } from "next/navigation";
+import { useAppDispatch } from "@/redux/hook";
+import { clearUser } from "@/redux/features/auth/auth.slice";
 
 const ProfileLinks = () => {
   const pathname = usePathname();
+  const dispatch = useAppDispatch()
   const links = [
     {
       path: "/profile",
@@ -23,6 +26,10 @@ const ProfileLinks = () => {
       path: "/profile/my-download",
       name: "My downloads",
     },
+    {
+      path: "/",
+      name: "Logout",
+    },
   ];
   return (
     <>
@@ -30,7 +37,8 @@ const ProfileLinks = () => {
         <Link key={idx} href={link.path}>
           <Button
             variant={pathname === link.path ? "default" : "ghost"}
-            className=""
+            className="w-full"
+            onClick={() => link.name === "Logout" && dispatch(clearUser()) }
           >
             {link.name}
           </Button>
