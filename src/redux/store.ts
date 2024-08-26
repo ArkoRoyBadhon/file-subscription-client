@@ -11,6 +11,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import authReducer from "./features/auth/auth.slice";
+import planReducer from "./features/plans/plan.slice";
 import { api } from "./api/appSlice";
 
 
@@ -25,12 +26,17 @@ const persistedAuthReducer = persistReducer(
   { ...persistConfig, key: "auth" },
   authReducer
 );
+const persistedPlanReducer = persistReducer(
+  { ...persistConfig, key: "plan" },
+  planReducer
+);
 
 
 // Configure store
 const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
+    plan: persistedPlanReducer,
     [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddleware) =>

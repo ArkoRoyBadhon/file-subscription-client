@@ -10,8 +10,15 @@ const planApi = api.injectEndpoints({
       }),
       providesTags: ["plan"],
     }),
+    purchaseSubscriptionPlan: builder.mutation({
+      query: (post) => ({
+        url: "/purchase/create",
+        method: "POST",
+        body: post,
+      }),
+      invalidatesTags: ["plan"],
+    }),
   }),
 });
-export const {
-  useGetSubscriptionPlanQuery
-} = planApi;
+export const { useGetSubscriptionPlanQuery, usePurchaseSubscriptionPlanMutation } =
+  planApi;
