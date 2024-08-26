@@ -10,6 +10,15 @@ const planApi = api.injectEndpoints({
       }),
       providesTags: ["plan"],
     }),
+    getPlanById: builder.query({
+      query: ({planId}) => {
+        return ({
+          url: `/plan/get/${planId}`,
+          method: "GET",
+        })
+      },
+      providesTags: ["plan"],
+    }),
     purchaseSubscriptionPlan: builder.mutation({
       query: (post) => ({
         url: "/purchase/create",
@@ -18,7 +27,16 @@ const planApi = api.injectEndpoints({
       }),
       invalidatesTags: ["plan"],
     }),
+    getPurchaseByUser: builder.query({
+      query: () => {
+        return ({
+          url: `/purchase/get`,
+          method: "GET",
+        })
+      },
+      providesTags: ["plan"],
+    }),
   }),
 });
-export const { useGetSubscriptionPlanQuery, usePurchaseSubscriptionPlanMutation } =
+export const { useGetSubscriptionPlanQuery, useGetPlanByIdQuery, usePurchaseSubscriptionPlanMutation, useGetPurchaseByUserQuery } =
   planApi;

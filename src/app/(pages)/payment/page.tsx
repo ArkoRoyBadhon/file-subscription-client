@@ -19,9 +19,7 @@ export default function Payment() {
     <main className="min-h-[60vh]">
       <div className="max-w-md mx-auto p-10 border m-10 rounded-md shadow-md">
         {planData?.price === 0 ? (
-          <button className="w-full border py-[6px] rounded-md hover:bg-btnColor/80 hover:text-white bg-slate-300">
-            Activate
-          </button>
+          <p className="w-full text-center text-btnColor">This Plan Already Has Been Expired</p>
         ) : (
           <>
             <div className="mb-10">

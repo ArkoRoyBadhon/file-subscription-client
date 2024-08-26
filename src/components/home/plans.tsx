@@ -45,12 +45,17 @@ const Plans = () => {
   const dispatch = useAppDispatch();
 
   const handlePlan = (plan: any) => {
+  
     if (plan) {
-      if (user?.plan == plan?._id) {
+      if (user?.plan === plan?._id) {
         toast.info("Already on this plan");
       } else {
-        dispatch(setPlanData(plan));
-        router.push("/payment");
+        const userConfirmed = window.confirm("Are you sure you want to select this plan? Your current plan will cancel.");
+  
+        if (userConfirmed) {
+          dispatch(setPlanData(plan));
+          router.push("/payment");
+        }
       }
     }
   };

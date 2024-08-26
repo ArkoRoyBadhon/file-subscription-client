@@ -1,9 +1,13 @@
+"use client"
 import { Bookmark, DownloadIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
 
 const ProductCard = ({ product }: any) => {
+
+  console.log("url ======", product.fileUrl);
+  
   return (
     <div className="max-w-sm rounded-md overflow-hidden shadow-lg m-4 relative">
       <span className="absolute top-0 right-0 inline-block rounded-bl-full px-5 py-1 text-sm font-semibold  mb-2 capitalize bg-btnColor text-white">
@@ -34,7 +38,9 @@ const ProductCard = ({ product }: any) => {
           <Bookmark />
         </Button>
         <Button size="icon" variant="ghost">
-          <DownloadIcon />
+          <a href={product.fileUrl} download title="Download">
+            <DownloadIcon />
+          </a>
         </Button>
       </div>
     </div>

@@ -32,8 +32,6 @@ const ProductsView: React.FC = () => {
     sort: sortOption,
     category: selectedCategory,
     brand: selectedTag,
-    // minPrice: priceRange[0],
-    // maxPrice: priceRange[1],
   });
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -53,18 +51,18 @@ const ProductsView: React.FC = () => {
     setCurrentPage(1);
   };
 
-  const handleBrandChange = (brandValue: string) => {
-    setSelectedTag(brandValue);
-    setCurrentPage(1);
-  };
+  // const handleBrandChange = (brandValue: string) => {
+  //   setSelectedTag(brandValue);
+  //   setCurrentPage(1);
+  // };
 
-  const handleShowMoreBrands = () => {
-    setVisibleTag((prevCount) => prevCount + 5);
-  };
+  // const handleShowMoreBrands = () => {
+  //   setVisibleTag((prevCount) => prevCount + 5);
+  // };
 
-  const handleShowLessBrands = () => {
-    setVisibleTag(5);
-  };
+  // const handleShowLessBrands = () => {
+  //   setVisibleTag(5);
+  // };
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -101,7 +99,7 @@ const ProductsView: React.FC = () => {
           clear Filter
         </button>
         <div className="space-y-3">
-          <div className="p-3 rounded shadow-md">
+          <div className="p-3 rounded border">
             <h3 className="font-semibold mb-2">Categories</h3>
             <ul>
               {productCategories &&
@@ -146,7 +144,7 @@ const ProductsView: React.FC = () => {
           </div>
         </div>
         <div className="space-y-3 mt-[20px]">
-          <div className="p-3 rounded shadow-md">
+          <div className="p-3 rounded border">
             <h3 className="font-semibold mb-2">Types</h3>
             <ul>
               {productTags &&

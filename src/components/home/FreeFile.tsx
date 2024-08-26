@@ -1,9 +1,15 @@
+'use client'
 import Link from "next/link";
 import React from "react";
 import ProductCard from "../shared/Card";
 import { productsFake } from "@/mocks/cardData";
+import { useGetAllProductsQuery } from "@/redux/features/product/product.api";
 
 const FreeFile = () => {
+  const { data, isSuccess, isLoading, error } = useGetAllProductsQuery({
+    limit: 3,
+  });
+
   return (
     <section className="mt-[60px] mb-[40px] container_main">
       <h6 className="text-3xl font-semibold mb-[20px] text-center text-primaryTxt">
@@ -22,9 +28,11 @@ const FreeFile = () => {
           Create New Account
         </Link>
       </div>
-      <p className="mt-[10px] text-gray-400 text-center">You can select any two file</p>
+      <p className="mt-[10px] text-gray-400 text-center">
+        You can select any two file
+      </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-[10px]">
-        {productsFake.splice(0,3).map((product) => (
+        {isSuccess && data.data.map((product:any) => (
           <ProductCard key={product._id} product={product} />
         ))}
       </div>

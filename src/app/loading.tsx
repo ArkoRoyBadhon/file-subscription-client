@@ -1,5 +1,7 @@
+import LoadingCom from "@/components/shared/Loading";
+
 const Loading = () => {
-  return <div>Please wait ...</div>;
+  return <LoadingCom />;
 };
 
 export default Loading;
