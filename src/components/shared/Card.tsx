@@ -9,6 +9,7 @@ import { useGetProductQuery } from "@/redux/features/product/product.api";
 import { setDownloadedItems } from "@/redux/features/auth/auth.slice";
 import { IProduct } from "@/types/productType";
 import { addProduct, removeProduct } from "@/redux/features/product/product.slice";
+import { usePathname } from "next/navigation";
 
 const ProductCard = ({ product }: { product: IProduct }) => {
   const productId = product?._id;
@@ -16,6 +17,7 @@ const ProductCard = ({ product }: { product: IProduct }) => {
   const { token, user } = useAppSelector((state) => state.auth);
   const { type } = useAppSelector((state) => state.product);
   const dispatch = useAppDispatch();
+  const pathname = usePathname()
 
   const handleDownload = async () => {
     try {
@@ -87,7 +89,7 @@ const ProductCard = ({ product }: { product: IProduct }) => {
         </p>
       </div>
       <div className="flex justify-end items-center gap-2 text-primaryTxt">
-        {type === "collection" ? (
+        {pathname === "/profile/my-collection" ? (
           <Button
             onClick={() => handleCollectionRemove()}
             size="icon"
