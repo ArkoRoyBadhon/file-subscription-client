@@ -1,8 +1,11 @@
+import MycollectionCom from "@/components/client/MycollectionCom";
+
+
 const MyCollection = () => {
   return (
-    <div>
-      <h1 className="text-xl font-bold">My Collections</h1>
-    </div>
+    <section className="mt-[60px] mb-[40px] container_main h-[calc(100vh-240px)] overflow-y-auto smoothBar">
+      <MycollectionCom />
+    </section>
   );
 };
 

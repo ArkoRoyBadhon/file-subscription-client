@@ -1,8 +1,10 @@
+import MyDownloadCom from "@/components/client/MyDownloadCom";
+
 const MyDownload = () => {
   return (
-    <div>
-      <h1 className="text-xl font-bold">My Download</h1>
-    </div>
+    <section className="(100vh-240px)] overflow-y-auto smoothBar">
+      <MyDownloadCom />
+    </section>
   );
 };
 

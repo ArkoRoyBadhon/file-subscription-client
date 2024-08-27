@@ -58,6 +58,15 @@ const productAPI = api.injectEndpoints({
       }),
       invalidatesTags: ['Product'],
     }),
+    userDownload: builder.query({
+      query: () => {
+        return {
+          url: `/download/get`,
+          method: "GET",
+        };
+      },
+      providesTags: ["Product"],
+    }),
   }),
 });
 
@@ -68,4 +77,5 @@ export const {
   useCreateProductMutation,
   useUpdateProductMutation,
   useDeleteProductMutation,
+  useUserDownloadQuery
 } = productAPI;

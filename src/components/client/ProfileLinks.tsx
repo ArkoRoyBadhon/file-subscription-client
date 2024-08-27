@@ -15,8 +15,8 @@ const ProfileLinks = () => {
       name: "Profile",
     },
     {
-      path: "/profile/settings",
-      name: "Settings",
+      path: "/profile/subscribe",
+      name: "Subscribe",
     },
     {
       path: "/profile/my-collection",

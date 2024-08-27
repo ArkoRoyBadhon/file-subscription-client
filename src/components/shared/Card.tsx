@@ -1,5 +1,5 @@
-"use client"
-import { Bookmark, DownloadIcon } from "lucide-react";
+"use client";
+import { Bookmark, DownloadIcon, PinOff } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
@@ -7,11 +7,14 @@ import { toast } from "sonner";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { useGetProductQuery } from "@/redux/features/product/product.api";
 import { setDownloadedItems } from "@/redux/features/auth/auth.slice";
+import { IProduct } from "@/types/productType";
+import { addProduct, removeProduct } from "@/redux/features/product/product.slice";
 
-const ProductCard = ({ product }: any) => {
-  const productId = product?._id
+const ProductCard = ({ product }: { product: IProduct }) => {
+  const productId = product?._id;
   const { data, isSuccess, isLoading } = useGetProductQuery({ productId });
   const { token, user } = useAppSelector((state) => state.auth);
+  const { type } = useAppSelector((state) => state.product);
   const dispatch = useAppDispatch();
 
   const handleDownload = async () => {
@@ -29,10 +32,10 @@ const ProductCard = ({ product }: any) => {
       if (!response.ok) {
         throw new Error("Failed to download file");
       }
-      if( response.ok && data.data.tags.label === "Premium") {
+      if (response.ok && data.data.tags.label === "Premium") {
         dispatch(setDownloadedItems(user?.downloadedItems! + 1));
       }
-   
+
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement("a");
@@ -41,12 +44,21 @@ const ProductCard = ({ product }: any) => {
       document.body.appendChild(link);
       link.click();
       link.parentNode?.removeChild(link);
-
-      
     } catch (error: any) {
       console.error("Error downloading the file:", error);
-      toast.error(error?.message  || "Failed to download. Please check your subcription")
+      toast.error(
+        error?.message || "Failed to download. Please check your subcription"
+      );
     }
+  };
+
+  const handleCollectionRemove = () => {
+    dispatch((removeProduct(productId!)));
+    toast.success("Successfully remove from  collections");
+  };
+  const handleCollection = () => {
+    dispatch(addProduct(product));
+    toast.success("Save to My Collections");
   };
 
   return (
@@ -61,7 +73,7 @@ const ProductCard = ({ product }: any) => {
           className="w-full h-[300px] object-cover object-center"
           // src={product.image}
           src="/images/img1.jpg"
-          alt={product.fileName}
+          alt={product?.fileName || ""}
         />
         <div className="px-6 pt-3">
           <div className="text-xl font-bold text-primaryTxt">
@@ -75,14 +87,30 @@ const ProductCard = ({ product }: any) => {
         </p>
       </div>
       <div className="flex justify-end items-center gap-2 text-primaryTxt">
-        <Button size="icon" variant="ghost">
-          <Bookmark />
-        </Button>
-        <Button onClick={handleDownload} size="icon" variant="ghost">
-          {/* <a href={product.fileUrl} title="Download"> */}
-            <DownloadIcon />
-          {/* </a> */}
-        </Button>
+        {type === "collection" ? (
+          <Button
+            onClick={() => handleCollectionRemove()}
+            size="icon"
+            variant="ghost"
+          >
+            <PinOff />
+          </Button>
+        ) : (
+          <>
+            <Button
+              onClick={() => handleCollection()}
+              size="icon"
+              variant="ghost"
+            >
+              <Bookmark />
+            </Button>
+            <Button onClick={handleDownload} size="icon" variant="ghost">
+              {/* <a href={product.fileUrl} title="Download"> */}
+              <DownloadIcon />
+              {/* </a> */}
+            </Button>
+          </>
+        )}
       </div>
     </div>
   );

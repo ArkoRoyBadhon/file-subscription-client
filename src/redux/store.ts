@@ -12,6 +12,7 @@ import {
 import storage from "redux-persist/lib/storage";
 import authReducer from "./features/auth/auth.slice";
 import planReducer from "./features/plans/plan.slice";
+import productReducer from "./features/product/product.slice";
 import { api } from "./api/appSlice";
 
 
@@ -30,6 +31,10 @@ const persistedPlanReducer = persistReducer(
   { ...persistConfig, key: "plan" },
   planReducer
 );
+const persistedProductReducer = persistReducer(
+  { ...persistConfig, key: "product" },
+  productReducer
+);
 
 
 // Configure store
@@ -37,6 +42,7 @@ const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
     plan: persistedPlanReducer,
+    product: persistedProductReducer,
     [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddleware) =>

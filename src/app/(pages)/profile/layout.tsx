@@ -19,7 +19,9 @@ const ProfileLayout = ({ children }: { children: React.ReactNode }) => {
       <div className="lg:col-span-2 border p-5 flex lg:flex-col gap-2 rounded-md">
         <ProfileLinks />
       </div>
-      <div className="lg:col-span-8 border p-5 rounded-md">{children}</div>
+      <div className="lg:col-span-8 border p-5 rounded-md">
+        {children}
+      </div>
     </div>
   );
 };
