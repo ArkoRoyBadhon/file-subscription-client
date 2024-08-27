@@ -1,22 +1,22 @@
 "use client";
-import { useAppSelector, useAppDispatch } from "@/redux/hook";
-import { useGetAuthorQuery } from "@/redux/features/auth/auth.api";
+import { useAppSelector } from "@/redux/hook";
 import {
   useGetPlanByIdQuery,
   useGetPurchaseByUserQuery,
 } from "@/redux/features/plans/plan.api";
 import Loading from "@/app/loading";
+import { useGetAuthorQuery } from "@/redux/features/auth/auth.api";
 
 const ProfilePage = () => {
-  const dispatch = useAppDispatch();
   const { user, loading } = useAppSelector((state) => state.auth);
   const { data: planData, isSuccess: planSuccess } = useGetPlanByIdQuery({
     planId: user?.plan,
   });
-  const { data: purchaseData, isSuccess: purchaseGetSuccess } =
+  const { data: purchaseData } =
     useGetPurchaseByUserQuery(undefined);
+  const { data: userData, isSuccess:successUser } =
+    useGetAuthorQuery(undefined);
 
-  console.log("user dd", purchaseData);
 
   return (
     <div className="container mx-auto p-4">
@@ -34,11 +34,11 @@ const ProfilePage = () => {
             </p>
             <p>
               <strong>Available Limit:</strong>{" "}
-              {planSuccess && planData.data.limit - (user.downloadedItems || 0)}{" "}
+              {planSuccess && planData.data.limit - (successUser && userData.data.downloadedItems || 0)}{" "}
               items
             </p>
             <p>
-              <strong>Downloaded Items:</strong> {user.downloadedItems || 0}
+              <strong>Downloaded Items:</strong> {successUser && userData.data.downloadedItems}
             </p>
             <p>
               <strong>Expires Date:</strong>{" "}

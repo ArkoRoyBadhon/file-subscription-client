@@ -19,8 +19,7 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action: PayloadAction<IUser>) => {
-      console.log("slice", action.payload);
-      
+      console.log("www", action.payload);
       state.user = action.payload;
       state.isAuthenticated = true;
     },
@@ -32,6 +31,13 @@ const authSlice = createSlice({
     setToken: (state, action: PayloadAction<string | null>) => {
       state.token = action.payload;
     },
+    setDownloadedItems: (state, action: PayloadAction<number>) => {
+      console.log("www", action.payload);
+      
+      if (state.user) {
+        state.user.downloadedItems = state.user.downloadedItems! + action.payload;
+      }
+    },
 
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
@@ -39,6 +45,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { setUser, clearUser, setLoading, setToken } = authSlice.actions;
+export const { setUser, clearUser, setLoading, setToken,setDownloadedItems } = authSlice.actions;
 
 export default authSlice.reducer;

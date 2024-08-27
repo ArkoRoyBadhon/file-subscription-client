@@ -20,6 +20,7 @@ import { useLoginUserMutation } from "@/redux/features/auth/auth.api";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/redux/hook";
 import { setToken, setUser } from "@/redux/features/auth/auth.slice";
+import { toast } from "sonner";
 
 interface LoginFormValues {
   email: string;
@@ -59,7 +60,7 @@ export default function LoginForm() {
       if(response.success) {
         dispatch(setUser(response.data))
         dispatch(setToken(response.accessToken))
-
+        toast.success("Login Successfull")
         router.push("/");
       }
 

@@ -17,6 +17,24 @@ const productAPI = api.injectEndpoints({
       },
       providesTags: ["Product"],
     }),
+    getProduct: builder.query({
+      query: ({productId}) => {
+        return {
+          url: `/product/get/${productId}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["Product"],
+    }),
+    productDownload: builder.query({
+      query: ({productId}) => {
+        return {
+          url: `/product/download/${productId}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["Product"],
+    }),
     createProduct: builder.mutation({
       query: (newProduct) => ({
         url: '/product',
@@ -45,6 +63,8 @@ const productAPI = api.injectEndpoints({
 
 export const {
   useGetAllProductsQuery,
+  useGetProductQuery,
+  useProductDownloadQuery,
   useCreateProductMutation,
   useUpdateProductMutation,
   useDeleteProductMutation,

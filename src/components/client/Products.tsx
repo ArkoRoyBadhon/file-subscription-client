@@ -15,14 +15,10 @@ const ProductsView: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [visibleCategories, setVisibleCategories] = useState<number>(5);
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
-  const [visibleTag, setVisibleTag] = useState<number>(5);
   const productsPerPage = 8;
   const minPrice = 0;
   const maxPrice = 10000;
-  const [priceRange, setPriceRange] = useState<[number, number]>([
-    minPrice,
-    maxPrice,
-  ]);
+
 
   const { data: productCategories } = useGetAllCategoriesQuery(undefined);
   const { data: productTags } = useGetAllTagsQuery(undefined);
@@ -70,7 +66,6 @@ const ProductsView: React.FC = () => {
 
   const ResetFilter = () => {
     setSelectedCategory(null);
-    setPriceRange([0, 10000]);
     setSelectedTag(null);
   };
 
