@@ -5,6 +5,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { Toaster } from "sonner";
 // import AuthProvider from "./AuthProvider";
 import { persistor, store } from "@/redux/store";
+import SubProvider from "./Subprovider";
 
 const ReduxProvider = ({ children }: { children: React.ReactNode }) => {
   ////----important(TO PREVENT HYDRATION ERROR)
@@ -20,7 +21,7 @@ const ReduxProvider = ({ children }: { children: React.ReactNode }) => {
       <PersistGate loading={null} persistor={persistor}>
         <Toaster position="top-center" richColors={true} />
         {/* <AuthProvider>{children}</AuthProvider> */}
-        {children}
+        <SubProvider>{children}</SubProvider>
       </PersistGate>
     </Provider>
   );

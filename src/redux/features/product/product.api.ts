@@ -29,7 +29,7 @@ const productAPI = api.injectEndpoints({
     productDownload: builder.query({
       query: ({productId}) => {
         return {
-          url: `/product/download/${productId}`,
+          url: `/download/buy/${productId}`,
           method: "GET",
         };
       },

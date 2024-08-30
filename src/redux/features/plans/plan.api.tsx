@@ -2,11 +2,10 @@ import { api } from "@/redux/api/appSlice";
 
 const planApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getSubscriptionPlan: builder.query({
+    getSubscriptionPrices: builder.query({
       query: () => ({
-        url: "/plan/get-all",
+        url: "/subs/prices",
         method: "GET",
-        // body: post,
       }),
       providesTags: ["plan"],
     }),
@@ -38,5 +37,5 @@ const planApi = api.injectEndpoints({
     }),
   }),
 });
-export const { useGetSubscriptionPlanQuery, useGetPlanByIdQuery, usePurchaseSubscriptionPlanMutation, useGetPurchaseByUserQuery } =
+export const { useGetSubscriptionPricesQuery, useGetPlanByIdQuery, usePurchaseSubscriptionPlanMutation, useGetPurchaseByUserQuery } =
   planApi;

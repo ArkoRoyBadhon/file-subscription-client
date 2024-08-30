@@ -6,6 +6,5 @@ interface IUser {
   password?: string;
   role?: string;
   downloadedItems?: number;
-  plan?: string;
-  planDate?: Date;
+  subscriptions?: any[];
 }

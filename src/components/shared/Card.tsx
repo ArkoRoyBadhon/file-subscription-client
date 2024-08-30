@@ -20,9 +20,11 @@ const ProductCard = ({ product }: { product: IProduct }) => {
   const pathname = usePathname()
 
   const handleDownload = async () => {
+    console.log("donn sss");
+    
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/product/download/${productId}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/download/buy/${productId}`,
         {
           method: "GET",
           headers: {
